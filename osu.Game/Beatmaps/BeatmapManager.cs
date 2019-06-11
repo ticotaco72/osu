@@ -117,6 +117,7 @@ namespace osu.Game.Beatmaps
             if (beatmapSet.OnlineBeatmapSetID != null)
             {
                 var existingOnlineId = beatmaps.ConsumableItems.FirstOrDefault(b => b.OnlineBeatmapSetID == beatmapSet.OnlineBeatmapSetID);
+
                 if (existingOnlineId != null)
                 {
                     Delete(existingOnlineId);
@@ -325,6 +326,7 @@ namespace osu.Game.Beatmaps
         {
             // let's make sure there are actually .osu files to import.
             string mapName = reader.Filenames.FirstOrDefault(f => f.EndsWith(".osu"));
+
             if (string.IsNullOrEmpty(mapName))
             {
                 Logger.Log($"No beatmap files found in the beatmap archive ({reader.Name}).", LoggingTarget.Database);
@@ -340,6 +342,7 @@ namespace osu.Game.Beatmaps
                 OnlineBeatmapSetID = beatmap.BeatmapInfo.BeatmapSet?.OnlineBeatmapSetID,
                 Beatmaps = new List<BeatmapInfo>(),
                 Metadata = beatmap.Metadata,
+                DateAdded = DateTimeOffset.UtcNow
             };
         }
 
@@ -427,7 +430,7 @@ namespace osu.Game.Beatmaps
             private readonly IBeatmap beatmap;
 
             public DummyConversionBeatmap(IBeatmap beatmap)
-                : base(beatmap.BeatmapInfo)
+                : base(beatmap.BeatmapInfo, null)
             {
                 this.beatmap = beatmap;
             }

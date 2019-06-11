@@ -35,14 +35,14 @@ namespace osu.Game.Overlays.Profile.Header
         [BackgroundDependencyLoader]
         private void load(OsuColour colours)
         {
-            iconColour = colours.CommunityUserGrayGreenLighter;
+            iconColour = colours.GreySeafoamLighter;
 
             InternalChildren = new Drawable[]
             {
                 new Box
                 {
                     RelativeSizeAxes = Axes.Both,
-                    Colour = colours.CommunityUserGrayGreenDarker,
+                    Colour = colours.GreySeafoamDark,
                 },
                 new FillFlowContainer
                 {
@@ -87,14 +87,6 @@ namespace osu.Game.Overlays.Profile.Header
 
             addSpacer(topLinkContainer);
 
-            if (user.PlayStyles?.Length > 0)
-            {
-                topLinkContainer.AddText("Plays with ");
-                topLinkContainer.AddText(string.Join(", ", user.PlayStyles.Select(style => style.GetDescription())), embolden);
-
-                addSpacer(topLinkContainer);
-            }
-
             if (user.LastVisit.HasValue)
             {
                 topLinkContainer.AddText("Last seen ");
@@ -103,10 +95,19 @@ namespace osu.Game.Overlays.Profile.Header
                 addSpacer(topLinkContainer);
             }
 
+            if (user.PlayStyles?.Length > 0)
+            {
+                topLinkContainer.AddText("Plays with ");
+                topLinkContainer.AddText(string.Join(", ", user.PlayStyles.Select(style => style.GetDescription())), embolden);
+
+                addSpacer(topLinkContainer);
+            }
+
             topLinkContainer.AddText("Contributed ");
             topLinkContainer.AddLink($@"{user.PostCount:#,##0} forum posts", $"https://osu.ppy.sh/users/{user.Id}/posts", creationParameters: embolden);
 
             string websiteWithoutProtcol = user.Website;
+
             if (!string.IsNullOrEmpty(websiteWithoutProtcol))
             {
                 if (Uri.TryCreate(websiteWithoutProtcol, UriKind.Absolute, out var uri))

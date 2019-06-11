@@ -51,8 +51,8 @@ namespace osu.Game.Graphics.Containers
             if (osuGame != null)
                 OverlayActivationMode.BindTo(osuGame.OverlayActivationMode);
 
-            samplePopIn = audio.Sample.Get(@"UI/overlay-pop-in");
-            samplePopOut = audio.Sample.Get(@"UI/overlay-pop-out");
+            samplePopIn = audio.Samples.Get(@"UI/overlay-pop-in");
+            samplePopOut = audio.Samples.Get(@"UI/overlay-pop-out");
 
             StateChanged += onStateChanged;
         }
@@ -84,6 +84,7 @@ namespace osu.Game.Graphics.Containers
                 case GlobalAction.Back:
                     State = Visibility.Hidden;
                     return true;
+
                 case GlobalAction.Select:
                     return true;
             }
@@ -107,6 +108,7 @@ namespace osu.Game.Graphics.Containers
                         State = Visibility.Hidden;
 
                     break;
+
                 case Visibility.Hidden:
                     if (PlaySamplesOnStateChange) samplePopOut?.Play();
                     if (BlockScreenWideMouse) osuGame?.RemoveBlockingOverlay(this);

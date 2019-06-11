@@ -46,7 +46,7 @@ namespace osu.Game.Overlays.BeatmapSet.Scores
                         Text = "#1",
                         Font = OsuFont.GetFont(size: 30, weight: FontWeight.Bold, italics: true)
                     },
-                    rank = new DrawableRank(ScoreRank.F)
+                    rank = new DrawableRank(ScoreRank.D)
                     {
                         Anchor = Anchor.Centre,
                         Origin = Anchor.Centre,
@@ -83,7 +83,7 @@ namespace osu.Game.Overlays.BeatmapSet.Scores
                                 Origin = Anchor.CentreLeft,
                                 AutoSizeAxes = Axes.Both,
                             },
-                            date = new SpriteText
+                            date = new OsuSpriteText
                             {
                                 Anchor = Anchor.CentreLeft,
                                 Origin = Anchor.CentreLeft,

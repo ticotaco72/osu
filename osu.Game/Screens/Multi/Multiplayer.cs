@@ -248,13 +248,14 @@ namespace osu.Game.Screens.Multi
             if (screenStack.CurrentScreen is MatchSubScreen)
             {
                 var track = Beatmap.Value.Track;
+
                 if (track != null)
                 {
                     track.Looping = true;
 
                     if (!track.IsRunning)
                     {
-                        game.Audio.AddItemToList(track);
+                        game.Audio.AddItem(track);
                         track.Seek(Beatmap.Value.Metadata.PreviewTime);
                         track.Start();
                     }
